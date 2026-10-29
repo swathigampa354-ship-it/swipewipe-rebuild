@@ -42,10 +42,11 @@ user-supplied credentials to function end-to-end (documented) · ❌ intentional
 - [ ] OneDrive *photo compress on cloud copy* variants — ◻ (edge feature not verifiable in scope).
 
 ## Testing status
-- Static: compile + resource link + lint via GitHub Actions (assembleDebug) — runs on push.
-- Feature tests: performed during implementation only as far as on-device Termux allows
-  (no emulator on this device). **No feature is claimed as runtime-verified beyond compilation,
-  APK validity checks (aapt dump badging), and artifact install checks.** See BUILD_REPORT.md.
+- Static: compile + resource link via GitHub Actions (assembleDebug) — **PASSED** on run
+  40841215206 (commit `b90ff55`); APK 64.5 MB, sha256
+  `c3f1fa8aba2f6216f17d85ed8838fef49b0b6b7d94b0adfee55ecf98a524a9e9`.
+- Feature tests: **No feature is runtime-verified.** This device has no emulator; claims are
+  limited to compilation, APK assembly, and artifact publication. See BUILD_REPORT.md.
 
 ## Faithfulness notes (what is equal ≠ what is not)
 - Equal *by evidence*: data schema, channel names, worker set, feature set, package-level behavior,
