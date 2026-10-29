@@ -69,7 +69,7 @@ interface CompletedPeriodDao {
     suspend fun upsertAll(list: List<CompletedPeriodEntity>)
 
     @Query("SELECT * FROM completedPeriods WHERE mediaSource = :source ORDER BY year DESC, month DESC")
-    fun observe(source: String): Flow<List<CompletedPeriodEntity>>
+    fun observePeriods(source: String): Flow<List<CompletedPeriodEntity>>
 }
 
 @Dao
