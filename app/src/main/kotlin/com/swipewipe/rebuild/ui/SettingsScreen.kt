@@ -31,7 +31,7 @@ import com.swipewipe.rebuild.graph.GraphAuthActivity
 @Composable
 fun SettingsScreen(
     settings: UserSettings,
-    onSetting: suspend (SettingsStore.() -> Unit) -> Unit,
+    onSetting: (suspend SettingsStore.() -> Unit) -> Unit,
     onRunSimilarScan: () -> Unit,
     onRunCloudSync: (Boolean) -> Unit,
     onCompressNow: () -> Unit,

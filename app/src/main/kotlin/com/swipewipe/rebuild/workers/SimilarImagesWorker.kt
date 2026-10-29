@@ -52,7 +52,7 @@ class SimilarImagesWorker(
                         row.signatureBytes, member.signatureBytes
                     )
                     if (d <= threshold) {
-                        byGroup[gid] = members + row
+                        byGroup[gid] = (members + row).toMutableList()
                         continue@outer
                     }
                 }

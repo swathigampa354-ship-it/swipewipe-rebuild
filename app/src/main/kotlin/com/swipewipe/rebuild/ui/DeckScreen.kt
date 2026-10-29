@@ -4,6 +4,7 @@ import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -99,7 +100,6 @@ private fun SwipeCard(
         if (flyAnim.value < 1f) flyAnim.animateTo(1f, tween(120))
     }
 
-    val scaleX = remember(item.id) { Animatable(1f) }
     val dragging = abs(offsetX) > 40f
 
     Card(

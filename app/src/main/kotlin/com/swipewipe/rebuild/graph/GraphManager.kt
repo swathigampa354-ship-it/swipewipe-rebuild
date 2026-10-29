@@ -6,6 +6,7 @@ import com.swipewipe.rebuild.db.CloudMediaItemEntity
 import com.swipewipe.rebuild.db.CloudMonthAggregateEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import org.json.JSONArray
 import org.json.JSONObject
 import java.time.Instant
@@ -175,7 +176,7 @@ class GraphManager(private val context: android.content.Context) {
             }
             sb.append("--").append(boundary).append("--\r\n")
             val body = okhttp3.RequestBody.create(
-                okhttp3.MediaType.parse("multipart/mixed; boundary=$boundary"),
+                "multipart/mixed; boundary=$boundary".toMediaTypeOrNull(),
                 sb.toString()
             )
             val req = okhttp3.Request.Builder()

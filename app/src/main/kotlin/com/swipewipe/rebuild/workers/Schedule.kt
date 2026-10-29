@@ -11,6 +11,7 @@ import com.swipewipe.rebuild.GraphManager
 import com.swipewipe.rebuild.MediaStoreRepo
 import com.swipewipe.rebuild.SettingsStore
 import com.swipewipe.rebuild.db.AppDatabase
+import com.swipewipe.rebuild.graph.GraphManager
 import java.util.concurrent.TimeUnit
 
 class RebuildWorkerFactory(

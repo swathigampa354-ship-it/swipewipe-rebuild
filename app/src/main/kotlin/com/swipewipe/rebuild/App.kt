@@ -7,6 +7,8 @@ import android.content.Context
 import androidx.room.Room
 import androidx.work.Configuration
 import com.swipewipe.rebuild.db.AppDatabase
+import com.swipewipe.rebuild.graph.GraphManager
+import com.swipewipe.rebuild.workers.RebuildWorkerFactory
 import com.swipewipe.rebuild.workers.Schedule
 
 class App : Application(), Configuration.Provider {

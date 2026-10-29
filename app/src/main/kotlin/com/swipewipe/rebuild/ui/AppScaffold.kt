@@ -278,9 +278,11 @@ fun AppScaffold(settings: UserSettings, vm: AppVm) {
                     settings = settings,
                     onSetting = { block ->
                         scope.launch {
-                            kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.Main) {
-                                block.invoke(SettingsStore(localSettings.applicationContext as android.content.Context))
-                            }
+                            block.invoke(
+                                SettingsStore(
+                                    localSettings.applicationContext as android.content.Context
+                                )
+                            )
                         }
                     },
                     onRunSimilarScan = { vm.runSimilarScan() },

@@ -20,6 +20,7 @@ import com.swipewipe.rebuild.workers.PhotoCompressWorker
 import com.swipewipe.rebuild.workers.SimilarImagesWorker
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.time.LocalDate
@@ -45,7 +46,7 @@ class AppVm(app: Application) : AndroidViewModel(app) {
         viewModelScope.launch {
             loading.value = true
             val items = withContext(Dispatchers.IO) {
-                a.media.loadGallery(prefs().sortOrder)
+                a.media.loadGallery(a.settings.flow.first().sortOrder)
             }
             gallery.value = items
             val decisions = withContext(Dispatchers.IO) {
@@ -70,18 +71,17 @@ class AppVm(app: Application) : AndroidViewModel(app) {
     fun decideKeep(item: GalleryItem) {
         decisionStack.addLast(item)
         decided[key(item.id, item.mediaSource)] = "keep"
-        record(true, item, "keep", 0)
+        viewModelScope.launch(Dispatchers.IO) { record(item, "keep", 0) }
     }
 
-    fun decideDelete(item: GalleryItem, onDeleted: (Int) -> Unit) {
+    fun decideDelete(item: GalleryItem, onDeleted: (Long) -> Unit) {
         decisionStack.addLast(item)
         decided[key(item.id, item.mediaSource)] = "delete"
         viewModelScope.launch(Dispatchers.IO) {
-            val before = a.db.appDao().observeAllStats().sumOf { it.totalSize }
-            val outcome = a.media.deleteMedia(item.mediaSource, listOf(item.id))
-            val freed = if (item.mediaSource == "image" && item.sizeBytes > 0) item.sizeBytes else 0
-            record(true, item, "delete", freed)
-            b().recordDelete(1)
+            a.media.deleteMedia(item.mediaSource, listOf(item.id))
+            val freed = if (item.mediaSource == "image" && item.sizeBytes > 0) item.sizeBytes else 0L
+            record(item, "delete", freed)
+            a.settings.recordDelete(1)
             withContext(Dispatchers.Main) {
                 onDeleted(item.sizeBytes)
             }
@@ -92,11 +92,11 @@ class AppVm(app: Application) : AndroidViewModel(app) {
         decided[key(item.id, item.mediaSource)] = "bookmark"
         viewModelScope.launch(Dispatchers.IO) {
             a.db.appDao().add(BookmarkEntity(item.id, item.mediaSource))
-            record(true, item, "bookmark", 0)
+            record(item, "bookmark", 0)
         }
     }
 
-    private suspend fun record(seen: Boolean, item: GalleryItem, decision: String, freed: Long) {
+    private suspend fun record(item: GalleryItem, decision: String, freed: Long) {
         val dao = a.db.appDao()
         dao.upsert(MediaDecisionEntity(item.mediaSource, item.id, decision))
         dao.add(
@@ -213,7 +213,4 @@ class AppVm(app: Application) : AndroidViewModel(app) {
         toast.value = "Cloud sync queued${if (force) " (full resync)" else ""}"
     }
 
-    private fun prefs() = a.settings
-
-    private fun b() = a.settings
 }

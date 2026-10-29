@@ -5,8 +5,9 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.swipewipe.rebuild.MainActivity
+import com.swipewipe.rebuild.ui.MainActivity
 import com.swipewipe.rebuild.SettingsStore
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class GraphAuthActivity : AppCompatActivity() {

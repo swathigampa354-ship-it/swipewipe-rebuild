@@ -23,7 +23,7 @@ object PhotoIntelligence {
             val r = (px shr 16) and 0xFF
             val g = (px shr 8) and 0xFF
             val b = px and 0xFF
-            return (r * 299 + g * 587 + b * 114) / 1000
+            return (r * 299 + g * 587 + b * 114) / 1000L
         }
         for (y in 0 until h) {
             for (x in 0 until w) {
@@ -45,8 +45,8 @@ object PhotoIntelligence {
 
     private fun extractThumbnail(src: Bitmap, tw: Int, th: Int): Bitmap {
         val scale = maxOf(tw * 1.0 / src.width, th * 1.0 / src.height)
-        val w = Math.max(1, Math.round(src.width * scale))
-        val h = Math.max(1, Math.round(src.height * scale))
+        val w = maxOf(1, Math.round(src.width * scale).toInt())
+        val h = maxOf(1, Math.round(src.height * scale).toInt())
         return Bitmap.createScaledBitmap(src, w, h, true)
     }
 

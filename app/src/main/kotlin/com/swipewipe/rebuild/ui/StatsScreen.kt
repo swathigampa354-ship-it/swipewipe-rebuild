@@ -47,7 +47,7 @@ fun StatsScreen(
         item {
             Text(
                 "Stats",
-                style = MaterialTheme.typigraphy.titleMedium,
+                style = MaterialTheme.typography.titleMedium,
                 modifier = Modifier.padding(vertical = 8.dp)
             )
         }

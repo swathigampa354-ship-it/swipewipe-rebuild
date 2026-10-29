@@ -7,7 +7,7 @@ import android.content.Intent
 import androidx.core.app.NotificationCompat
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
-import com.swipewipe.rebuild.MainActivity
+import com.swipewipe.rebuild.ui.MainActivity
 import com.swipewipe.rebuild.R
 import com.swipewipe.rebuild.db.AppDatabase
 import kotlinx.coroutines.flow.first

@@ -12,9 +12,6 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface BookmarkDao {
     @Query("SELECT * FROM bookmarks ORDER BY createdAt DESC")
-    fun observeAll(): Flow<List<BookmarkEntity>>
-
-    @Query("SELECT * FROM bookmarks ORDER BY createdAt DESC")
     fun observeBookmarks(): Flow<List<BookmarkEntity>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
