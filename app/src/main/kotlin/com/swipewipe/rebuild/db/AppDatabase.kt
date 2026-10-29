@@ -99,7 +99,7 @@ interface SimilarImageDao {
 @Dao
 interface CloudMediaDao {
     @Upsert
-    suspend fun upsertAll(items: List<CloudMediaItemEntity>)
+    suspend fun upsertCloudItems(items: List<CloudMediaItemEntity>)
 
     @Query("SELECT * FROM cloudMediaItems WHERE mediaSource = :source ORDER BY lastModifiedMs DESC")
     fun observe(source: String): Flow<List<CloudMediaItemEntity>>
@@ -118,7 +118,7 @@ data class MonthAggregate(
 @Dao
 interface CloudMonthAggregateDao {
     @Upsert
-    suspend fun upsertAll(list: List<CloudMonthAggregateEntity>)
+    suspend fun upsertAggregates(list: List<CloudMonthAggregateEntity>)
 
     @Query("SELECT * FROM cloudMonthAggregate ORDER BY monthKey DESC")
     fun observeAggregateAll(): Flow<List<CloudMonthAggregateEntity>>

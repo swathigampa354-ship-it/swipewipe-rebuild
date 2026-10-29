@@ -147,7 +147,7 @@ class GraphManager(private val context: android.content.Context) {
         }.sortedByDescending { it.monthKey }
 
     suspend fun insertIntoDb(db: AppDatabase, photos: List<CloudPhoto>) =
-        db.appDao().upsertAll(
+        db.appDao().upsertCloudItems(
             photos.map {
                 CloudMediaItemEntity(
                     id = it.id,
