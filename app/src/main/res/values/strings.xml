@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Swipewipe Rebuild</string>
+    <string name="channel_swipewipe">Swipewipe</string>
+    <string name="channel_streak">streak</string>
+    <string name="channel_cooldown">cooldown</string>
+    <string name="channel_similar_images">similar_images</string>
+    <string name="channel_media_tools_progress">media_tools_progress</string>
+</resources>

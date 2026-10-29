@@ -1,0 +1,2 @@
+-keep class com.swipewipe.rebuild.graph.** { *; }
+-dontwarn okhttp3.internal.platform.**
