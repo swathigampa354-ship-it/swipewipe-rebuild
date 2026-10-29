@@ -124,7 +124,7 @@ interface CloudMonthAggregateDao {
     fun observeAggregateAll(): Flow<List<CloudMonthAggregateEntity>>
 
     @Query("SELECT * FROM cloudMonthAggregate WHERE mediaSource = :source ORDER BY monthKey DESC")
-    suspend fun forSource(source: String): List<CloudMonthAggregateEntity>
+    suspend fun aggregatesFor(source: String): List<CloudMonthAggregateEntity>
 
     @androidx.room.Insert(onConflict = androidx.room.OnConflictStrategy.REPLACE)
     suspend fun upsertAggregateMonths(list: List<CloudMonthAggregateEntity>)
